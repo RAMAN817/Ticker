@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Brand: the red -->
+    <color name="md_primary">#FF3B30</color>
+    <color name="md_on_primary">#FFFFFF</color>
+
+    <!-- Dark surfaces -->
+    <color name="md_surface">#000000</color>          <!-- pure black screen bg -->
+    <color name="md_surface_container">#1C1C1E</color> <!-- slightly lifted cards -->
+    <color name="md_on_surface">#FFFFFF</color>        <!-- white text -->
+    <color name="md_on_surface_variant">#8E8E93</color><!-- grey secondary text -->
+    <color name="md_outline">#2C2C2E</color>          <!-- subtle borders/dividers -->
+
+    <!-- Financial semantics -->
+    <color name="ticker_gain">#34C759</color>          <!-- green, price up -->
+    <color name="ticker_loss">#FF3B30</color>          <!-- red, price down -->
+
 </resources>
