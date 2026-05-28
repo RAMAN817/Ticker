@@ -1,3 +1,6 @@
+import java.util.Properties
+import java.io.FileInputStream
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -10,6 +13,18 @@ android {
     compileSdk = 35
 
     defaultConfig {
+        val localProperties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            localProperties.load(FileInputStream(localPropertiesFile))
+
+        }
+        buildConfigField(
+            "String",
+            "FINNHUB_API_KEY",
+            "\"${localProperties.getProperty("FINNHUB_API_KEY") ?: ""}\""
+        )
+
         applicationId = "com.example.ticker"
         minSdk = 24
         targetSdk = 35
@@ -33,7 +48,9 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
     buildFeatures {
+        buildConfig = true
         viewBinding = true
+
     }
 }
 
