@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -91,6 +92,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 
     implementation("com.google.dagger:hilt-android:2.57.1")
+    implementation("com.squareup.moshi:moshi:1.15.1")
     ksp("com.google.dagger:hilt-android-compiler:2.57.1")
     // ViewModel + LiveData
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
