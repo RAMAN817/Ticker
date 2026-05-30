@@ -1,4 +1,8 @@
 package com.example.ticker.ui.stocks
 
-class StockDetailsFragment {
+import androidx.fragment.app.FragmentActivity
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class StockDetailsFragment: FragmentActivity() {
 }

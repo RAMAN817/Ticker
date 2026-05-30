@@ -1,4 +1,8 @@
 package com.example.ticker.ui.home
 
-class HomeFragment {
+import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class HomeFragment: Fragment() {
 }
