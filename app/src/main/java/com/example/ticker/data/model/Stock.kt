@@ -1,18 +1,16 @@
 package com.example.ticker.data.model
 
+import com.google.gson.annotations.SerializedName
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class Stock(
-    val country: String,
-    val currency: String,
-    val estimateCurrency: String,
-    val exchange: String,
-    val ipo:String,
-    val logo: String,
-    val name: String,
-    val marketCapitalization: String,
-    val phone: String,
-    val ticker: String,
-    val weburl: String
+    @SerializedName("c")  val current: Double,
+    @SerializedName("h")  val high: Double,
+    @SerializedName("l")  val low: Double,
+    @SerializedName("o")  val open: Double,
+    @SerializedName("pc") val previousClose: Double,
+    @SerializedName("d")  val change: Double,
+    @SerializedName("dp") val changePercent: Double,
+    @SerializedName("t")  val timestamp: Long
 )

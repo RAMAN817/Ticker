@@ -14,7 +14,7 @@ interface NewsApiService {
     suspend fun getNews(
         @Query("category")  category:String = "general"
 
-    ): Response<List<Article>>
+    ): List<Article>
 
 
 
