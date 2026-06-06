@@ -46,18 +46,22 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
+    kotlin{
+        jvmToolchain(17)
+    }
+
     buildFeatures {
-        buildConfig = true
+       buildConfig = true
         viewBinding = true
 
     }
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
+    implementation("androidx.core:core-ktx:1.16.0")
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.constraintlayout)
@@ -106,4 +110,7 @@ dependencies {
     //moshi converter
     implementation("com.squareup.retrofit2:converter-moshi:2.11.0")
     implementation("com.squareup.moshi:moshi-kotlin:1.15.2")
+    //OKHttp logging
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+
 }

@@ -10,6 +10,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
@@ -27,17 +28,22 @@ object NetworkModule {
         .build()
 
     @Provides @Singleton
-    fun provideOkHttpClient() : OkHttpClient = OkHttpClient.Builder()
-        //Interceptor ,  intercepts evey outgoing request before it send
-        .addInterceptor { chain ->
-            val url  = chain.request().url.newBuilder() // gives the original request
-                .addQueryParameter("token",  BuildConfig.FINNHUB_API_KEY)// this grabs
-                // the url and append token = key
-                .build()
-            chain.proceed(chain.request().newBuilder().url(url).build()) //get the original link and
-            //swap it with new URL with the  token
+    fun provideOkHttpClient(): OkHttpClient {
+        val logging = HttpLoggingInterceptor().apply {
+            level = HttpLoggingInterceptor.Level.BODY
         }
-        .build()
+        return OkHttpClient.Builder()
+            .addInterceptor { chain ->                       // your token interceptor
+                val url = chain.request().url.newBuilder()
+                    .addQueryParameter("token", BuildConfig.FINNHUB_API_KEY)
+                    .build()
+                chain.proceed(chain.request().newBuilder().url(url).build())
+            }
+            .addInterceptor(logging)                         // logging — added AFTER token
+            .build()
+    }
+
+
 
     @Provides @Singleton
     fun provideRetrofit(moshi: Moshi , client: OkHttpClient) : Retrofit =

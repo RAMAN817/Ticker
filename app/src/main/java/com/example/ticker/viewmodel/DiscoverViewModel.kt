@@ -1,4 +1,8 @@
 package com.example.ticker.viewmodel
 
-class DiscoverViewModel {
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+
+@HiltViewModel
+class DiscoverViewModel @Inject constructor() {
 }
