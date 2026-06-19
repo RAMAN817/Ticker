@@ -100,7 +100,7 @@ dependencies {
     implementation("com.squareup.moshi:moshi:1.15.2")
     ksp("com.google.dagger:hilt-android-compiler:2.57.1")
     // ViewModel + LiveData
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.7.0")
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
