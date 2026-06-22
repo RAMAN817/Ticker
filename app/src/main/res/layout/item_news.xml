@@ -52,6 +52,7 @@
                 android:maxLines = "2"
                 android:ellipsize="end"
                 android:textColor = "?attr/colorOnSurfaceVariant"
+                />
 
 
 
