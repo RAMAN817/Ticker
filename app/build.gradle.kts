@@ -71,8 +71,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("io.coli-kt:coli:2.7.0")
-
+    implementation("io.coil-kt:coil:2.7.0")
     
     val nav_version = "2.9.8"
 

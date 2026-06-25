@@ -65,7 +65,7 @@ class HomeFragment: Fragment() {
     }
     private fun setupNewsRecyclerView() {
         //TODO
-       // binding.newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        //binding.newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
 
     }
     private fun renderStock(state: StockUiState){

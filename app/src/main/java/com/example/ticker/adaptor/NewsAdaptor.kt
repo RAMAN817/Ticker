@@ -1,5 +1,6 @@
 package com.example.ticker.adaptor
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,32 +33,34 @@ class NewsAdaptor(
         return NewsViewHolder(binding)
     }
 
+    //fills that box with actual data from  list
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         holder.bind(getItem(position))
         //TODO: Change viewType and create a big box for breaking news
     }
 
-    // Fix 1: added { } so bind() lives inside NewsViewHolder where it belongs
+
     inner class NewsViewHolder(
         private val binding: ItemNewsBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(article: Article) {
-            // Fix 2: .txt → .text (×2)
+
             binding.articleHeadline.text = article.headline
             binding.articleSummary.text = article.summary
 
             val formatted = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                 .format(Date(article.datetime * 1000L))
 
-            // Fix 4: removed stray single quote, use a proper separator
+
             binding.articleSourceDate.text = "${article.source} · $formatted"
 
             if (!article.image.isNullOrBlank()) {
                 binding.articleImage.visibility = View.VISIBLE
                 binding.articleImage.load(article.image) {
                     crossfade(true)
-                    error(R.drawable.ic_broken_image)
+
                 }
             } else {
                 binding.articleImage.visibility = View.GONE
@@ -70,11 +73,11 @@ class NewsAdaptor(
     }
 
     class ArticleDiffCallback : DiffUtil.ItemCallback<Article>() {
-        // Fix 3: areItemsSame → areItemsTheSame
+
         override fun areItemsTheSame(oldItem: Article, newItem: Article) =
             oldItem.id == newItem.id
 
-        // Fix 3: areContentsSame → areContentsTheSame
+
         override fun areContentsTheSame(oldItem: Article, newItem: Article) =
             oldItem == newItem
     }
