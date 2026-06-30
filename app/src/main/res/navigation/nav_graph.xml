@@ -8,14 +8,24 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.ticker.ui.home.HomeFragment"
-        />
+        >
+        <action
+            android:id="@+id/action_homeFragment_to_discoverFragment"
+            app:destination="@id/discoverFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_newsFragment"
+            app:destination="@id/newsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_stocksFragment"
+            app:destination="@id/stocksFragment" />
+    </fragment>
     <fragment
         android:id="@+id/discoverFragment"
         android:name="com.example.ticker.ui.discover.DiscoverFragment"
         />
     <fragment
         android:id="@+id/stocksFragment"
-        android:name="com.example.ticker.ui.stocks.StocksFragment"
+        android:name="com.example.ticker.ui.Discover.StocksFragment"
         />
     <fragment
         android:id="@+id/newsFragment"

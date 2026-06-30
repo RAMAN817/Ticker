@@ -16,12 +16,9 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val stockRepository: StockRepository,
     private val newsRepository: NewsRepository
 ) : ViewModel() {
-    private val _stockState =
-        MutableStateFlow<StockUiState>(StockUiState.Idle)//gets the  Idle when started
-    val stockState: StateFlow<StockUiState> = _stockState.asStateFlow()
+
     private val _newsState = MutableStateFlow<NewsUiState>(NewsUiState.Loading)
     val newsState: StateFlow<NewsUiState> = _newsState.asStateFlow()
 
@@ -31,24 +28,7 @@ class HomeViewModel @Inject constructor(
         loadNews()
     }
 
-    fun loadStock(symbol: String) {
-        viewModelScope.launch {
-            _stockState.value = StockUiState.Loading
-            val result = stockRepository.getStock(symbol)
 
-            result.onSuccess { //if  successfully got  symbol
-                    stock ->
-                _stockState.value = StockUiState.Success(stock)
-
-            }.onFailure { exception ->  //else
-                _stockState.value = StockUiState.Error(
-                    exception.message ?: "unknown error"
-                )
-            }
-        }
-
-
-    }
 
     fun loadNews(category: String = "general") {
         viewModelScope.launch {

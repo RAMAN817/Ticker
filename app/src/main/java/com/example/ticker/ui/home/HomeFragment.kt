@@ -11,11 +11,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.ticker.adaptor.NewsAdaptor
 import com.example.ticker.databinding.FragmentHomeBinding
 import com.example.ticker.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+import android.content.Intent
+import android.net.Uri
 @AndroidEntryPoint
 class HomeFragment: Fragment() {
     private val viewModel: HomeViewModel by viewModels()
@@ -38,19 +40,9 @@ class HomeFragment: Fragment() {
         setupNewsRecyclerView()
 
         binding.searchButton.setOnClickListener{
-            val symbol = binding.searchEditText.text.toString().trim().uppercase()
-            if (symbol.isNotEmpty())viewModel.loadStock(symbol)
+
         }
-        //Starts a coroutine tied to the Fragment’s VIEW lifecycle
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){ //Turn the listener ON when screen is visible, OFF when hidden
-                //every time state changes (loading, success, error)
-                //react to every new state emitted while listener is ON
-                viewModel.stockState.collect { state ->
-                    renderStock(state)
-                }
-            }
-        }
+
         // Collect news state — auto-loads because ViewModel calls loadNews() in init {}
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) { //Turn the listener ON when screen is visible, OFF when hidden
@@ -64,32 +56,9 @@ class HomeFragment: Fragment() {
 
     }
     private fun setupNewsRecyclerView() {
-        //TODO
-        //binding.newsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        val newsAdapter = NewsAdaptor
+    }
 
-    }
-    private fun renderStock(state: StockUiState){
-        when(state) {
-            is StockUiState.Idle -> {
-                binding.stockProgressBar.visibility = View.GONE
-                binding.stockErrorText.visibility = View.GONE
-            }
-            is StockUiState.Loading -> {
-                binding.stockProgressBar.visibility = View.VISIBLE
-                binding.stockErrorText.visibility = View.GONE
-            }
-            is StockUiState.Success -> {
-                binding.stockProgressBar.visibility = View.GONE
-                binding.stockErrorText.visibility = View.GONE
-                // e.g. binding.stockPriceText.text = state.stock.currentPrice.toString()
-            }
-            is StockUiState.Error -> {
-                binding.stockProgressBar.visibility = View.GONE
-                binding.stockErrorText.visibility = View.VISIBLE
-                binding.stockErrorText.text = state.message
-            }
-        }
-    }
     private fun renderNews(state: NewsUiState) {
         when (state) {
             is NewsUiState.Loading -> {
@@ -98,6 +67,7 @@ class HomeFragment: Fragment() {
             is NewsUiState.Success -> {
                 binding.newsProgressBar.visibility = View.GONE
                 // TODO: newsAdapter.submitList(state.articles)
+                NewsAdaptor(onArticleClicked = artic)
             }
             is NewsUiState.Error -> {
                 binding.newsProgressBar.visibility = View.GONE
