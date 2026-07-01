@@ -10,8 +10,8 @@
         android:name="com.example.ticker.ui.home.HomeFragment"
         >
         <action
-            android:id="@+id/action_homeFragment_to_discoverFragment"
-            app:destination="@id/discoverFragment" />
+            android:id="@+id/action_homeFragment_to_articleDetailFragment"
+            app:destination="@id/ArticleDetailFragment" />
         <action
             android:id="@+id/action_homeFragment_to_newsFragment"
             app:destination="@id/newsFragment" />
@@ -26,6 +26,10 @@
     <fragment
         android:id="@+id/stocksFragment"
         android:name="com.example.ticker.ui.Discover.StocksFragment"
+        />
+    <fragment
+        android:id="@+id/ArticleDetailFragment"
+        android:name="com.example.ticker.ui.news.ArticleDetailFragment"
         />
     <fragment
         android:id="@+id/newsFragment"

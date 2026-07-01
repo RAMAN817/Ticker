@@ -18,6 +18,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import android.content.Intent
 import android.net.Uri
+import androidx.navigation.fragment.findNavController
+import com.example.ticker.R
+import com.example.ticker.data.model.Article
+
 @AndroidEntryPoint
 class HomeFragment: Fragment() {
     private val viewModel: HomeViewModel by viewModels()
@@ -25,6 +29,7 @@ class HomeFragment: Fragment() {
     private var _binding: FragmentHomeBinding? = null //Fragment can exist but View can be destroyed,so its prevent memory leaks
      private val binding get() = _binding!!//Whenever I use binding, return _binding, but force it to be non-null
 
+    private lateinit var  newsAdaptor: NewsAdaptor
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,6 +45,8 @@ class HomeFragment: Fragment() {
         setupNewsRecyclerView()
 
         binding.searchButton.setOnClickListener{
+            findNavController().navigate(R.id.action_homeFragment_to_stocksFragment)
+
 
         }
 
@@ -56,9 +63,16 @@ class HomeFragment: Fragment() {
 
     }
     private fun setupNewsRecyclerView() {
-        val newsAdapter = NewsAdaptor
-    }
 
+        newsAdaptor = NewsAdaptor(onArticleClicked = { article ->
+            findNavController()
+            R.id.action_homeFragment_to_articleDetailFragment
+        }
+        )
+        binding.NewsRe
+
+
+    }
     private fun renderNews(state: NewsUiState) {
         when (state) {
             is NewsUiState.Loading -> {
@@ -67,7 +81,6 @@ class HomeFragment: Fragment() {
             is NewsUiState.Success -> {
                 binding.newsProgressBar.visibility = View.GONE
                 // TODO: newsAdapter.submitList(state.articles)
-                NewsAdaptor(onArticleClicked = artic)
             }
             is NewsUiState.Error -> {
                 binding.newsProgressBar.visibility = View.GONE
@@ -80,4 +93,5 @@ class HomeFragment: Fragment() {
         super.onDestroyView()
         _binding = null
 
+    }
 }
