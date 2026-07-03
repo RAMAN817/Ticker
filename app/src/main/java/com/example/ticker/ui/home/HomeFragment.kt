@@ -65,13 +65,20 @@ class HomeFragment: Fragment() {
     private fun setupNewsRecyclerView() {
 
         newsAdaptor = NewsAdaptor(onArticleClicked = { article ->
-            findNavController()
-            R.id.action_homeFragment_to_articleDetailFragment
+            val bundle  = Bundle().apply {
+                putLong("articleId", article.id)
+
+            }
+            findNavController().navigate(
+                R.id.action_homeFragment_to_articleDetailFragment,
+                bundle
+            )
         }
         )
-        binding.NewsRe
-
-
+        binding.newsRecyclerView.apply {          // check the actual ID from fragment_home.xml
+            layoutManager = LinearLayoutManager(requireContext())
+            adapter = newsAdaptor
+        }
     }
     private fun renderNews(state: NewsUiState) {
         when (state) {
@@ -80,7 +87,7 @@ class HomeFragment: Fragment() {
             }
             is NewsUiState.Success -> {
                 binding.newsProgressBar.visibility = View.GONE
-                // TODO: newsAdapter.submitList(state.articles)
+                newsAdaptor.submitList(state.articles))
             }
             is NewsUiState.Error -> {
                 binding.newsProgressBar.visibility = View.GONE

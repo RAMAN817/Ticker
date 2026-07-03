@@ -18,6 +18,7 @@ import java.util.Locale
 
 class NewsAdaptor(
     //onArticleClicked tells which article is tapped in
+    //(ParameterTypes) -> ReturnType
     private val onArticleClicked: (Article) -> Unit
 )
     //ArticleDiffCallback() tells if its same article or different
