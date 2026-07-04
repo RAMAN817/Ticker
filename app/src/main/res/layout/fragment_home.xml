@@ -1,15 +1,25 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/md_surface"
-    android:id = "@+id/newsRecyclerView"
     >
 
-    <!-- Search Bar Container -->
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id = "@+id/newsRecyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/searchCard"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <!--Search Bar-->
     <androidx.cardview.widget.CardView
         android:id="@+id/searchCard"
         android:layout_width="0dp"
@@ -21,32 +31,29 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <LinearLayout
-            android:background="@color/cardview_dark_background"
+            android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/cardview_dark_background"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:padding="12dp"
-
-            >
-
-
+            android:padding="12dp">
 
             <EditText
                 android:id="@+id/searchEditText"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:autofillHints="Search Stocks"
-                android:paddingStart="8dp"/>
+                android:autofillHints="Search Stock"
+                android:paddingStart="8dp"
+                tools:ignore="RtlSymmetry" />
             <ImageView
+                android:id="@+id/searchButton"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/search_button"
                 android:contentDescription="Search icon" />
 
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
