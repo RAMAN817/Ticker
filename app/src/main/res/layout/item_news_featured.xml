@@ -1,69 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:layout_marginHorizontal="16dp"
+android:layout_marginBottom="12dp"
+app:cardCornerRadius="12dp"
+app:cardElevation="2dp"
+    >
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="12dp"
-    android:clickable="true"
-    android:focusable="true"
-    android:foreground="?attr/selectableItemBackground"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    android:orientation = "vertical">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="180dp"
+        android:contentDescription="@null"
+        android:id="@+id/articleImage"
+        android:scaleType="centerCrop"
+        android:visibility="gone"/>
+    <!--Thumbnail is hidden if image is hidden -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <!-- Featured Image - Taller for hero card -->
-        <ImageView
-            android:id="@+id/article_image"
-            android:layout_width="match_parent"
-            android:layout_height="280dp"
-            android:scaleType="centerCrop"
-            android:visibility="gone" />
-
-        <!-- Content area -->
-        <LinearLayout
+        android:orientation = "vertical"
+        android:padding="12dp">
+        <!--Source and date-->
+        <TextView
+            android:id = "@+id/articleSourceDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:textColor="?attr/colorOnSurfaceVariant"
+            android:layout_marginBottom="4dp"/>
+        <!--headline-->
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:ellipsize="end"
+            android:id="@+id/articleHeadline"
+            android:maxLines="2"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="6dp"/>
+        <!--Summary-->
+        <TextView
+            android:id="@+id/articleSummary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize = "13sp"
+            android:maxLines = "2"
+            android:ellipsize="end"
+            android:textColor = "?attr/colorOnSurfaceVariant"
+            />
 
-            <!-- Headline - Larger for featured -->
-            <TextView
-                android:id="@+id/article_headline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:textColor="@android:color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:paddingBottom="8dp" />
 
-            <!-- Summary - More visible for featured -->
-            <TextView
-                android:id="@+id/article_summary"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:maxLines="3"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="14sp"
-                android:paddingBottom="12dp" />
 
-            <!-- Source and Date -->
-            <TextView
-                android:id="@+id/article_source_date"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="12sp" />
-
-        </LinearLayout>
 
     </LinearLayout>
+</LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>
+
+

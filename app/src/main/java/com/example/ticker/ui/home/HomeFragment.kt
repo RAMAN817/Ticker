@@ -87,7 +87,7 @@ class HomeFragment: Fragment() {
             }
             is NewsUiState.Success -> {
                 binding.newsProgressBar.visibility = View.GONE
-                newsAdaptor.submitList(state.articles))
+                newsAdaptor.submitList(state.news)
             }
             is NewsUiState.Error -> {
                 binding.newsProgressBar.visibility = View.GONE
