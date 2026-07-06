@@ -1,4 +1,8 @@
 package com.example.ticker.ui.news
 
-class ArticleDetailFragment {
+import androidx.fragment.app.Fragment
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
+class ArticleDetailFragment: Fragment() {
 }

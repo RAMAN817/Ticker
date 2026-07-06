@@ -1,4 +1,4 @@
-package com.example.ticker.ui.Discover
+package com.example.ticker.ui.discover
 
 import com.example.ticker.data.model.Stock
 
