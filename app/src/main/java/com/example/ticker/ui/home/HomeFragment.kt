@@ -45,7 +45,7 @@ class HomeFragment: Fragment() {
         setupNewsRecyclerView()
 
         binding.searchButton.setOnClickListener{
-            findNavController().navigate(R.id.action_homeFragment_to_stocksFragment)
+            findNavController().navigate(R.id.action_homeFragment_to_articleDetailFragment)
 
 
         }
