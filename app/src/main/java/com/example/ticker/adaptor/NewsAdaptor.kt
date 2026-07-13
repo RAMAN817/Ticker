@@ -17,38 +17,33 @@ import java.util.Date
 import java.util.Locale
 
 class NewsAdaptor(
-    //onArticleClicked tells which article is tapped in
-    //(ParameterTypes) -> ReturnType
+    // onArticleClicked tells which article is tapped in
+    // (ParameterTypes) -> ReturnType
     private val onArticleClicked: (Article) -> Unit
-)
-    //ArticleDiffCallback() tells if its same article or different
+) : ListAdapter<Article, RecyclerView.ViewHolder>(ArticleDiffCallback()) {
 
-    : ListAdapter<Article, RecyclerView.ViewHolder>(ArticleDiffCallback()) {
-
-        companion object{
-            private const val VIEW_TYPE_FEATURED = 0
-            private const val VIEW_TYPE_REGULAR = 1
-
-        }
-
-    //if position is 0 its FEATURED,anything else REGULAR
-    override fun getItemViewType(position: Int): Int {
-        return if (position == 0 ) VIEW_TYPE_FEATURED else VIEW_TYPE_REGULAR
+    companion object {
+        private const val VIEW_TYPE_FEATURED = 0
+        private const val VIEW_TYPE_REGULAR = 1
     }
 
+    // if position is 0 its FEATURED, anything else REGULAR
+    override fun getItemViewType(position: Int): Int {
+        return if (position == 0) VIEW_TYPE_FEATURED else VIEW_TYPE_REGULAR
+    }
 
-
-//onCreateViewHolder() is called when RecyclerView needs a new ViewHolder of the given type to represent an item.
-
+    // onCreateViewHolder() is called when RecyclerView needs a new ViewHolder of the given type to represent an item.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when(viewType) {
+        return when (viewType) {
             VIEW_TYPE_FEATURED -> {
                 val binding = ItemNewsFeaturedBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
                 )
-                FeaturedNewsViewHolder(binding, onArticleClicked)
+                // no need to pass onArticleClicked here anymore —
+                // inner class already has access to it from NewsAdaptor
+                FeaturedNewsViewHolder(binding)
             }
 
             else -> {
@@ -57,59 +52,21 @@ class NewsAdaptor(
                     parent,
                     false
                 )
-
-                NewsViewHolder(binding,onArticleClicked)
+                NewsViewHolder(binding)
             }
         }
-            }
+    }
 
-    //fills that box with actual data from  list
+    // fills that box with actual data from list
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when(holder){
-                is FeaturedNewsViewHolder -> holder.bind(getItem(position))
-                is NewsViewHolder -> holder.bind(getItem(position))
-
+        when (holder) {
+            is FeaturedNewsViewHolder -> holder.bind(getItem(position))
+            is NewsViewHolder -> holder.bind(getItem(position))
         }
-
     }
 
     inner class FeaturedNewsViewHolder(
-        private val binding: ItemNewsFeaturedBinding,
-        private val onArticleClicked: (Article) -> Unit
-
-    ): RecyclerView.ViewHolder(binding.root){
-        @SuppressLint("SetTextI18n")
-        fun bind(article: Article) {
-
-            binding.articleHeadline.text = article.headline
-            binding.articleSummary.text = article.summary
-
-            val formatted = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                .format(Date(article.datetime * 1000L))
-
-
-            binding.articleSourceDate.text = "${article.source} · $formatted"
-
-            if (!article.image.isNullOrBlank()) {
-                binding.articleImage.visibility = View.VISIBLE
-                binding.articleImage.load(article.image) {
-                    crossfade(true)
-
-                }
-            } else {
-                binding.articleImage.visibility = View.GONE
-            }
-
-            binding.root.setOnClickListener {
-                onArticleClicked(article)
-            }
-        }
-
-    }
-
-    inner class NewsViewHolder(
-        private val binding: ItemNewsBinding,
-        private val onArticleClicked: (Article) -> Unit
+        private val binding: ItemNewsFeaturedBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         @SuppressLint("SetTextI18n")
@@ -121,6 +78,37 @@ class NewsAdaptor(
             val formatted = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                 .format(Date(article.datetime * 1000L))
 
+            binding.articleSourceDate.text = "${article.source} · $formatted"
+
+            if (!article.image.isNullOrBlank()) {
+                binding.articleImage.visibility = View.VISIBLE
+                binding.articleImage.load(article.image) {
+                    crossfade(true)
+                }
+            } else {
+                binding.articleImage.visibility = View.GONE
+            }
+
+            // this is the moment the actual clicked article gets passed
+            // up to HomeFragment's lambda
+            binding.root.setOnClickListener {
+                onArticleClicked(article)
+            }
+        }
+    }
+
+    inner class NewsViewHolder(
+        private val binding: ItemNewsBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
+
+        @SuppressLint("SetTextI18n")
+        fun bind(article: Article) {
+
+            binding.articleHeadline.text = article.headline
+            binding.articleSummary.text = article.summary
+
+            val formatted = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                .format(Date(article.datetime * 1000L))
 
             binding.articleSourceDate.text = "${article.source} · $formatted"
 
@@ -128,12 +116,13 @@ class NewsAdaptor(
                 binding.articleImage.visibility = View.VISIBLE
                 binding.articleImage.load(article.image) {
                     crossfade(true)
-
                 }
             } else {
                 binding.articleImage.visibility = View.GONE
             }
 
+            // this is the moment the actual clicked article gets passed
+            // up to HomeFragment's lambda
             binding.root.setOnClickListener {
                 onArticleClicked(article)
             }
@@ -144,7 +133,6 @@ class NewsAdaptor(
 
         override fun areItemsTheSame(oldItem: Article, newItem: Article) =
             oldItem.id == newItem.id
-
 
         override fun areContentsTheSame(oldItem: Article, newItem: Article) =
             oldItem == newItem
