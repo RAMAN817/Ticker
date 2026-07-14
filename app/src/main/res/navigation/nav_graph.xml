@@ -12,9 +12,6 @@
         <action
             android:id="@+id/action_homeFragment_to_articleDetailFragment"
             app:destination="@id/ArticleDetailFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_newsFragment"
-            app:destination="@id/newsFragment" />
 
     </fragment>
     <fragment
@@ -25,7 +22,13 @@
     <fragment
         android:id="@+id/ArticleDetailFragment"
         android:name="com.example.ticker.ui.news.ArticleDetailFragment"
-        />
+        android:label="ArticleDetail"
+        >
+        <argument
+            android:name="article"
+            app:argType="com.example.ticker.data.model.NewsArticle"
+            />
+    </fragment>
     <fragment
         android:id="@+id/newsFragment"
         android:name="com.example.ticker.ui.news.NewsFragment"

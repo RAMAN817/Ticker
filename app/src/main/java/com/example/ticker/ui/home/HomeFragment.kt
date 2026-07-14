@@ -65,14 +65,8 @@ class HomeFragment: Fragment() {
     private fun setupNewsRecyclerView() {
 
         newsAdaptor = NewsAdaptor(onArticleClicked = { article ->
-            val bundle  = Bundle().apply {
-                putLong("articleId", article.id)
-
-            }
-            findNavController().navigate(
-                R.id.action_homeFragment_to_articleDetailFragment,
-                bundle
-            )
+            val action = HomeFragmentDirections.actionHomeFragmentToArticleDetailFragment(article)
+            findNavController().navigate(action)
         }
         )
         binding.newsRecyclerView.apply {          // check the actual ID from fragment_home.xml

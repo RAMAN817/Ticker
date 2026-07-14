@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.ksp)
     id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
     kotlin("plugin.parcelize")
 
 }
