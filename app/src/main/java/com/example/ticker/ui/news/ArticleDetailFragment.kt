@@ -32,10 +32,7 @@ class ArticleDetailFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val article: Article = args.article
     }
-    override fun OnDestroyView(){
-        super.onDestroyView()
-        _binding = null
-    }
+
 
 }
 
