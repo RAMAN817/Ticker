@@ -1,5 +1,6 @@
 package com.example.ticker.ui.news
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,7 +35,15 @@ class ArticleDetailFragment: Fragment() {
         setupWebView(article.url)
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     private fun setupWebView(url: String){
+        binding.webView.apply{
+            settings.javaScriptEnabled = true
+            settings.domStorageEnabled = true
+
+
+
+        }
 
     }
 
