@@ -24,13 +24,18 @@ class ArticleDetailFragment: Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentArticleDetailsBinding.inflate(inflater, container,false)
-        return binding?.root
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val article: Article = args.article
+        setupWebView(article.url)
+    }
+
+    private fun setupWebView(url: String){
+
     }
 
 
