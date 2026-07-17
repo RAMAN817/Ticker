@@ -25,7 +25,7 @@ class ArticleDetailViewModel @Inject constructor(
      fun onPageFinished(){
          _uiState.value = ArticleDetailUiState.Loaded
      }
-     fun onPAgeError(){
+     fun onPageError(){
          _uiState.value = ArticleDetailUiState.Error
      }
 }

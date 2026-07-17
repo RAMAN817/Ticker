@@ -18,6 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import android.content.Intent
 import android.net.Uri
+import android.webkit.WebView
 import androidx.navigation.fragment.findNavController
 import com.example.ticker.R
 import com.example.ticker.data.model.Article
@@ -35,6 +36,7 @@ class HomeFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         _binding = FragmentHomeBinding.inflate(inflater,container,false)
         return binding.root //Gives Android the actual UI view hierarchy to display
     }

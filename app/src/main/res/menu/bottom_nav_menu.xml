@@ -10,11 +10,7 @@
         android:icon="@drawable/discover_button"
         android:title="@string/discover"
         />
-    <item
-        android:id=""
-        android:icon="@drawable/search_button"
-        android:title="@string/search"
-        />
+
 
 
 

@@ -26,7 +26,7 @@
         >
         <argument
             android:name="article"
-            app:argType="com.example.ticker.data.model.NewsArticle"
+            app:argType="com.example.ticker.data.model.Article"
             />
     </fragment>
     <fragment
