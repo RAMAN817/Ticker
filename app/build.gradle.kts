@@ -74,6 +74,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("io.coil-kt:coil:2.7.0")
+    implementation("androidx.webkit:webkit:1.16.0")
     
     val nav_version = "2.9.8"
 

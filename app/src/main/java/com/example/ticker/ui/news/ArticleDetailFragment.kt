@@ -64,6 +64,7 @@ class ArticleDetailFragment: Fragment() {
             settings.javaScriptEnabled = true
             settings.domStorageEnabled = true
 
+
             webViewClient = object: WebViewClient(){
                 override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
                     viewModel.onPageStarted()
