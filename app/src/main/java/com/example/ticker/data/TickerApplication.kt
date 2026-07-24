@@ -15,20 +15,5 @@ class TickerApplication : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        val config = WebViewStartUpConfig.Builder(Executors.newSingleThreadExecutor()).build()
-
-        WebViewCompat.startUpWebView(
-            this,
-            config,
-            object : WebViewOutcomeReceiver<WebViewStartUpResult, WebViewStartupException> {
-                override fun onResult(result: WebViewStartUpResult) {
-                    // startup complete, no-op needed
-                }
-
-                override fun onError(error: WebViewStartupException) {
-                    Log.w("TickerApplication", "WebView pre-warm failed", error)
-                }
-            }
-        )
     }
 }
