@@ -117,4 +117,8 @@ dependencies {
     //OKHttp logging
     implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
+    //glide
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    ksp("com.github.bumptech.glide:compiler:4.16.0")
+
 }

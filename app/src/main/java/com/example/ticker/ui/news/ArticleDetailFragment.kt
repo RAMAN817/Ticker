@@ -15,6 +15,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.example.ticker.databinding.FragmentArticleDetailsBinding
 import com.example.ticker.viewmodel.ArticleDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -39,7 +40,6 @@ class ArticleDetailFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
       super.onViewCreated(view, savedInstanceState)
-        setupWebView(viewModel.article.url)
         observeUiState()
     }
     private fun observeUiState(){
@@ -47,51 +47,43 @@ class ArticleDetailFragment: Fragment() {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
                 viewModel.uiState.collect {
                     state ->
-                    binding.progressBar.visibility = when(state){
-                        ArticleDetailUiState.Loading ->View.VISIBLE
-                        else -> View.GONE
+                    binding.progressBar.visibility = View.GONE
+                    binding.errorView.visibility = View.GONE
+                    binding.scrollView.visibility = View.GONE
+
+                    when(state) {
+                        is ArticleDetailUiState.Loading -> {
+                             binding.progressBar.visibility = View.VISIBLE
+
+                        }
+                        is ArticleDetailUiState.Success ->{
+                            binding.scrollView.visibility = View.VISIBLE
+                            binding.articleTitle.text = state.content.title
+                            binding.articleBody.text = state.content.textContent
+                            Glide.with(this@ArticleDetailFragment)
+                                .load(state.content.imageUrl)
+                                .into(binding.articleImage)
+
                     }
+                        is ArticleDetailUiState.Error -> {
+                            binding.errorView.visibility = View.VISIBLE
+                            binding.retryButton.setOnClickListener { viewModel.retry()                                                          }
+                        }
+
+
                 }
+
 
             }
         }
     }
 
 
-    @SuppressLint("SetJavaScriptEnabled")
-    private fun setupWebView(url: String){
-        binding.webView.apply{
-            settings.javaScriptEnabled = true
-            settings.domStorageEnabled = true
-
-
-            webViewClient = object: WebViewClient(){
-                override fun onPageStarted(view: WebView?, url: String?, favicon: Bitmap?) {
-                    viewModel.onPageStarted()
-                }
-
-                override fun onPageFinished(view: WebView?, url: String?) {
-                    viewModel.onPageFinished()
-                }
-
-                override fun onReceivedError(
-                    view: WebView?,
-                    request: WebResourceRequest?,
-                    error: WebResourceError?
-                ) {
-                    viewModel.onPageError()
-                }
-
-                override fun shouldOverrideUrlLoading(
-                    view: WebView?,
-                    request: WebResourceRequest?
-                ): Boolean = false
-            }
-
-            loadUrl(url)
-
-
         }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+
 
     }
 

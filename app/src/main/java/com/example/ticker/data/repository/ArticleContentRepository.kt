@@ -17,6 +17,8 @@ private val okHttpClient: OkHttpClient
     suspend fun extractArticle(url: String): Result<ArticleContent> =
         withContext(Dispatchers.IO) {
             try {
+
+
                 //creates a Http GET  request
                 val request = Request.Builder().url(url).build()
                 //execute the request and also check if response is successful
@@ -86,5 +88,8 @@ private val okHttpClient: OkHttpClient
             val src = img.attr("abs:src")
             src.isNotBlank() && !src.contains("icon", ignoreCase = true)
         }?.attr("abs:src")
+
+
     }
+
 }
