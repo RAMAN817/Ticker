@@ -3,7 +3,7 @@ package com.example.ticker.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ticker.data.repository.StockRepository
-import com.example.ticker.ui.home.StockUiState
+import com.example.ticker.ui.discover.StockUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
