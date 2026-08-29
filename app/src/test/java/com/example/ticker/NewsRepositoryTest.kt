@@ -9,9 +9,12 @@ import org.junit.Test
 
 
 class NewsRepositoryTest {
+     private val mock = mockk<NewsApiService>()
+     private val repository = NewsRepository(mock)
+
+
     @Test
-    fun newsRepositoryTest() = runTest{
-        val mock = mockk<NewsApiService>()
+    fun articleTest() = runTest{
 
         coEvery {
             mock.getNews(any())
@@ -54,7 +57,6 @@ class NewsRepositoryTest {
             )
         )
 
-        val repository = NewsRepository(mock)
         val result = repository.getNews("tech")
         coVerify {
             mock.getNews("tech")
@@ -70,6 +72,21 @@ class NewsRepositoryTest {
 
 
 
+
+
+    }
+    @Test
+    fun throwError() = runTest {
+        coEvery {
+            mock.getNews(any())
+        } throws Exception("error")
+
+        val result = repository.getNews("tech")
+        coVerify {
+            mock.getNews("tech")
+        }
+        assertTrue(result.isFailure)
+        assertEquals("error",result.exceptionOrNull()!!.message)
 
 
     }
