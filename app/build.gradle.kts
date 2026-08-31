@@ -8,6 +8,7 @@ plugins {
     alias(libs.plugins.ksp)
     id("com.google.dagger.hilt.android")
     id("androidx.navigation.safeargs.kotlin")
+
     kotlin("plugin.parcelize")
 
 }
@@ -123,5 +124,9 @@ dependencies {
     //glide
     implementation("com.github.bumptech.glide:glide:4.16.0")
     ksp("com.github.bumptech.glide:compiler:4.16.0")
+
+    //turbine
+    testImplementation("app.cash.turbine:turbine:1.2.1")
+
 
 }
