@@ -9,19 +9,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ticker.adaptor.NewsAdaptor
 import com.example.ticker.databinding.FragmentHomeBinding
 import com.example.ticker.viewmodel.HomeViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import android.content.Intent
-import android.net.Uri
-import android.webkit.WebView
 import androidx.navigation.fragment.findNavController
 import com.example.ticker.R
-import com.example.ticker.data.model.Article
+
 
 @AndroidEntryPoint
 class HomeFragment: Fragment() {

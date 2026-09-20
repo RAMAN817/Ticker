@@ -9,6 +9,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("androidx.navigation.safeargs.kotlin")
 
+
     kotlin("plugin.parcelize")
 
 }
@@ -127,6 +128,9 @@ dependencies {
 
     //turbine
     testImplementation("app.cash.turbine:turbine:1.2.1")
-
+     //room
+    implementation("androidx.room:room-runtime:2.8.1")
+    implementation("androidx.room:room-ktx:2.8.1")
+    ksp("androidx.room:room-compiler:2.8.1")
 
 }
