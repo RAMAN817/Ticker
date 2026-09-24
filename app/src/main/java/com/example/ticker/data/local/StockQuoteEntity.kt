@@ -15,7 +15,7 @@ data class StockQuoteEntity(
     val high: Double,
     val open: Double,
     val  previousClose: Double,
-    val lastUpdated: Double,
+    val lastUpdated: Long,
     val category: String // watchlist, largeCap, Index
 )
 
