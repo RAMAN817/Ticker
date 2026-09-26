@@ -1,7 +1,8 @@
 package com.example.ticker.data.repository
 
-import android.R
+
 import com.example.ticker.data.api.StockApiService
+import com.example.ticker.data.local.StockCategory
 import com.example.ticker.data.local.StockQuoteDao
 import com.example.ticker.data.local.StockQuoteEntity
 import com.example.ticker.data.model.Stock
@@ -53,7 +54,7 @@ class StockRepository @Inject constructor(
     }
 
     private suspend fun refresh(category: String, symbols: List<String>){
-        val refresh = symbols.mapNotNull {symbol ->
+        val fresh = symbols.mapNotNull {symbol ->
             runCatching {
                 val quote =  api.getStock(symbol)
               //GET  /quote?symbol
@@ -75,7 +76,15 @@ class StockRepository @Inject constructor(
                 )
             }.getOrNull()
         }
+        if ( fresh.isNotEmpty()){
+            dao.upsertAll(fresh)
+
+        }
 
     }
+    suspend fun  getWatchlist() = observeQuotes(StockCategory.WATCHLIST,WATCHLIST_SYMBOLS)
+    suspend fun getLargeCap() = observeQuotes(StockCategory.LARGE_CAP,LARGE_CAP_SYMBOLS)
+    suspend fun getIndices() = observeQuotes(StockCategory.INDEX, INDEX_SYMBOLS.keys.toList())
+
 
 }
