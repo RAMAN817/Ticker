@@ -18,7 +18,7 @@ data class StockQuoteEntity(
     val lastUpdated: Long,
     val category: String // watchlist, largeCap, Index
 )
-
+//this is so that we avoid typos
 object StockCategory{
     const val WATCHLIST = "watchlist"
     const val LARGE_CAP = "large_cap"
