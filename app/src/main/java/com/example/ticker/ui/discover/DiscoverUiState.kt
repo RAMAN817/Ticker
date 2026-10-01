@@ -3,10 +3,12 @@ package com.example.ticker.ui.discover
 import com.example.ticker.data.model.Stock
 
 
-    sealed interface StockUiState {
-        data object Loading : StockUiState //loading state
-        data class Success(val stock: Stock): StockUiState //success state
-        data class Error(val message:String): StockUiState  //failure start
-        data object Idle : StockUiState
 
+sealed interface DiscoverUiState{
+    data object Loading: DiscoverUiState
+    data class  Success(
+        val data: List<Stock>
+    ): DiscoverUiState
+    data class Error(val message:String):
+        DiscoverUiState  //failure state
 }

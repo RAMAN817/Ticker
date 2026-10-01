@@ -47,9 +47,13 @@ class StockTableViewModel @Inject constructor(
         viewModelScope.launch {
             block().collect{ flow.value = it}
         }
+        //stateIn takes  normal flow and turns  it in stateflow
         return flow.stateIn(
 
             scope = viewModelScope,
+
+            //keep collecting upstream flow while  some is observing
+            // when nobody is observing wait 5 seconds before stopping
             started = SharingStarted.WhileSubscribed(5_000),
             initialValue =  emptyList()
 
